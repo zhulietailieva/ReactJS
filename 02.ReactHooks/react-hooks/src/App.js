@@ -8,8 +8,8 @@ import CreateTask from './components/CreateTask';
 
 
 function App() {
-	const [tasks, setTasks] = useFetch('http://localhost:3030/jsonstore/todos',[]);
-	
+	const [tasks, setTasks, isLoading] = useFetch('http://localhost:3030/jsonstore/todos', []);
+
 	const taskCreateHandler = (newTask) => {
 		setTasks(state =>
 			[...state,
@@ -33,7 +33,10 @@ function App() {
 			</header>
 
 			<main>
-				<ListComponent tasks={tasks} taskDeleteHandler={taskDeleteHandler} />
+				{isLoading ?
+					<p>Loading...</p> :
+					<ListComponent tasks={tasks} taskDeleteHandler={taskDeleteHandler} />
+				}
 
 				<CreateTask taskCreateHandler={taskCreateHandler} />
 			</main>

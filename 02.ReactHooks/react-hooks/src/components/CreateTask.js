@@ -7,6 +7,7 @@ const CreateTask = ({
 
     const onSubmit = (e) => {
         e.preventDefault();
+        
         taskCreateHandler(task);
         setTask('');
     }
