@@ -12,7 +12,7 @@ import CreateTask from './components/CreateTask';
 
 function App() {
 	const [tasks, setTasks, isLoading] = useFetch('http://localhost:3030/jsonstore/todos', []);
-	const { removeTodo, createTodo } = useTodos();
+	const { removeTodo, createTodo, updateTodo } = useTodos();
 
 	const taskCreateHandler = async (newTask) => {
 		const createdTask = await createTodo(newTask);
@@ -31,9 +31,11 @@ function App() {
 		setTasks(state => state.filter(x => x._id != taskId));
 	};
 
-	const toggleTask = async (taskId) => {
-		setTasks(state => state.map(x=>x._id == taskId ? { ...x, isCompleted: !x.isCompleted } : x))
-	}
+	const toggleTask = async (task) => {
+		const updatedTask = { ...task, isCompleted: !task.isCompleted };
+		await updateTodo(task._id, updatedTask);
+		setTasks(state => state.map(x => x._id == task._id ? updatedTask : x))
+	};
 
 	return (
 		<TaskContext.Provider value={{ taskDeleteHandler, toggleTask }}>

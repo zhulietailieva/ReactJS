@@ -14,7 +14,7 @@ const TaskItem = ({
     return (
         <li>
             <span className={classNames.join(' ')}
-                onClick={() => toggleTask(task._id)}
+                onClick={() => toggleTask(task)}
             >
                 {task.title}
             </span>

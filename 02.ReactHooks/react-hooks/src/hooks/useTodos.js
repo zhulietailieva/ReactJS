@@ -18,16 +18,17 @@ const useTodos = () => {
         }).then(res => res.json());
     }
 
-    // const toggleTodo = (todoId) => {
-    //     return fetch(baseUrl, {
-    //         method: 'PATCH',
-    //         body:
-    //     })
-    // }
+    const updateTodo = (todoId, data) => {
+        return fetch(`${baseUrl}/${todoId}`, {
+            method: 'PUT',
+            body: JSON.stringify(data)
+        }).then(res => res.json());
+    }
 
     return {
         removeTodo,
-        createTodo
+        createTodo,
+        updateTodo
     }
 };
 
